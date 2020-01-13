@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GZZLogger", "GZZLogger.csproj", "{371A7487-1BE2-49DD-968B-1F1332F1C9C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{371A7487-1BE2-49DD-968B-1F1332F1C9C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{371A7487-1BE2-49DD-968B-1F1332F1C9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{371A7487-1BE2-49DD-968B-1F1332F1C9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{371A7487-1BE2-49DD-968B-1F1332F1C9C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2CA1D61-DEB9-44E3-A68A-7C40E08A55D7}
+	EndGlobalSection
+EndGlobal
