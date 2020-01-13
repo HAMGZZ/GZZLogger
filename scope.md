@@ -1,6 +1,6 @@
 ﻿# GZZ Logger
 
-##Required Features:
+## Required Features:
 - [ ] List of latest 10 or 20 contacts
 - [ ] User toggle, most recent / most contacted country
 - [ ] Graphic of zone / band contacts
@@ -13,7 +13,7 @@
 - [ ] When entering a call-sign, automatically search for a contact with that call-sing
 	- [ ] If in contest mode, warn if same call-sign is in the same band as previous contact
 
-##Would like Features:
+## Would like Features:
 - [ ] Read frequency from radio and auto populate into data entry section (possible with hamlib).
 - [ ] Archive database, to store every contact ever, no matter if in contest.
 	- [ ] Ability to read from archive. Or if in non-contact mode, show the search of contact from both current db and archive db.
