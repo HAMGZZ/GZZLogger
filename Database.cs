@@ -34,13 +34,15 @@ namespace GZZLogger
 
         public void write()
         {
-            using (var writer = new StreamWriter(databaseName))
+            using (var writer = new StreamWriter(databaseName, append: true))
             using (var csv = new CsvWriter(writer))
             {
                 csv.Configuration.TypeConverterOptionsCache.GetOptions<DateTime>().Formats = new string[] { "o" };
                 csv.WriteRecords(records);
             }
         }
+
+
         public void import()
         {
 
