@@ -165,6 +165,7 @@ namespace GZZLogger
                     //? rxs = default
                     commentEntry.Text = "";
                     modeEntry.Text = "";
+                    logList.SetSource(database.Records.Reverse().ToList());
                     logList.Redraw(rect);
                     top.SetFocus(callsignEntry);
                     Application.Refresh();
