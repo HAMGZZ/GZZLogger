@@ -11,7 +11,7 @@
 - [ ] Settings to determine type of contest, if in contest mode and contest start and end time.
 - [ ] Export Cabrilo, Adif and other file types for upload.
 - [ ] Import Cabrilo & Adif file types into a database.
-- [ ] When entering a call-sign, automatically search for a contact with that call-sing
+- [x] When entering a call-sign, automatically search for a contact with that call-sing
 	- [ ] If in contest mode, warn if same call-sign is in the same band as previous contact
 
 ## Would like Features:
