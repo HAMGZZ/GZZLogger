@@ -1,7 +1,7 @@
 ﻿# GZZ Logger
 
 ## Required Features:
-- [ ] List of latest 10 or 20 contacts
+- [x] List of latest 10 or 20 contacts
 - [ ] User toggle, most recent / most contacted country
 - [ ] Graphic of zone / band contacts
 - [ ] Contest start, elapsed and end time
