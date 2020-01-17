@@ -18,5 +18,11 @@ namespace GZZLogger
         public string TransmittedSerial{get;set;}
         public string ReceivedSerial{get;set;}
         public string Comments{get;set;}
+
+        public override string ToString()
+        {
+            string data = RecordId + "  " + TimeStamp.ToString("dd-MM-yy ") + "  " + Mode + "  " + Callsign + "  " + TransmittedSerial;
+            return data;
+        }
     }
 }

@@ -12,4 +12,5 @@ C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\obj\Debug\n
 C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\obj\Debug\netcoreapp3.0\GZZLogger.dll
 C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\obj\Debug\netcoreapp3.0\GZZLogger.pdb
 C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\bin\Debug\netcoreapp3.0\CsvHelper.dll
-C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\bin\Debug\netcoreapp3.0\settings.json
+C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\bin\Debug\netcoreapp3.0\NStack.dll
+C:\Users\Lewis Hamilton\OneDrive - UTS\Projects\2020_start\GZZLogger\bin\Debug\netcoreapp3.0\Terminal.Gui.dll

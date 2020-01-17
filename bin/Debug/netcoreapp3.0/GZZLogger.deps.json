@@ -9,7 +9,8 @@
       "GZZLogger/1.0.0": {
         "dependencies": {
           "CsvHelper": "12.2.3",
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "12.0.3",
+          "Terminal.Gui": "0.24.0"
         },
         "runtime": {
           "GZZLogger.dll": {}
@@ -36,7 +37,28 @@
           }
         }
       },
-      "System.Reflection.TypeExtensions/4.4.0": {}
+      "NStack.Core/0.11.0": {
+        "runtime": {
+          "lib/netstandard1.5/NStack.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "System.Reflection.TypeExtensions/4.4.0": {},
+      "System.ValueTuple/4.4.0": {},
+      "Terminal.Gui/0.24.0": {
+        "dependencies": {
+          "NStack.Core": "0.11.0",
+          "System.ValueTuple": "4.4.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Terminal.Gui.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -66,12 +88,33 @@
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
+    "NStack.Core/0.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LQrIt/ZS1+CXAXDN/1nEZuoyOEyrAqQVD9r5sWce22JkwMOHc3NUq1FmBkKdCjZzWJcooupMPvc8IQuQqADSRg==",
+      "path": "nstack.core/0.11.0",
+      "hashPath": "nstack.core.0.11.0.nupkg.sha512"
+    },
     "System.Reflection.TypeExtensions/4.4.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-dkmh/ySlwnXJp/1qYP9uyKkCK1CXR/REFzl7abHcArxBcV91mY2CgrrzSRA5Z/X4MevJWwXsklGRdR3A7K9zbg==",
       "path": "system.reflection.typeextensions/4.4.0",
       "hashPath": "system.reflection.typeextensions.4.4.0.nupkg.sha512"
+    },
+    "System.ValueTuple/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ==",
+      "path": "system.valuetuple/4.4.0",
+      "hashPath": "system.valuetuple.4.4.0.nupkg.sha512"
+    },
+    "Terminal.Gui/0.24.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uGiSOFDnQh4ujlEln2j2Jl8FKwZftbRiYHY2JF3d31GSVx/7JmOK2ptCxPIHbUVf+JcfhsMUPceGatjSBRH5ug==",
+      "path": "terminal.gui/0.24.0",
+      "hashPath": "terminal.gui.0.24.0.nupkg.sha512"
     }
   }
 }

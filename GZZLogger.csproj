@@ -8,12 +8,7 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="12.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="Terminal.Gui" Version="0.24.0" />
   </ItemGroup>
 
 </Project>

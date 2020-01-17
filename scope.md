@@ -5,6 +5,7 @@
 - [ ] User toggle, most recent / most contacted country
 - [ ] Graphic of zone / band contacts
 - [ ] Contest start, elapsed and end time
+- [x] Determine Country of the callsign.
 - [ ] Scoring for contest (every contest will be different so will be based on rules)
 - [ ] Place to enter contact with auto fill Transmitted serial depending on contest (based on the rules above, want to keep rules in one file.)
 - [ ] Settings to determine type of contest, if in contest mode and contest start and end time.
