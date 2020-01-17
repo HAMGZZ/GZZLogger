@@ -11,7 +11,7 @@ namespace GZZLogger
 
         private Database database;
         private Settings settings;
-
+        private Rect rect = new Rect(1, 3, 89, 21); //TODO: PLEASE RENAME THIS LEWIS!
         private Window logWindow;
         private Label logListTitles;
         private ListView logList;
@@ -58,7 +58,6 @@ namespace GZZLogger
                 X = 1,
                 Y = 2,
             };
-            var rect = new Rect(1, 3, 89, 21);
             logList = new ListView(rect, database.Records.Reverse().ToList());
 
             entryWindow = new Window("New Contact")
@@ -83,10 +82,11 @@ namespace GZZLogger
             };
             callsignEntry = new TextField("")
             {
+
+
                 X = Pos.Right(callsign),
                 Y = Pos.Percent(85),
                 Width = 10
-
             };
             frequency = new Label("FREQ:")
             {
@@ -214,8 +214,25 @@ namespace GZZLogger
                     logList);
 
 
-
+            callsignEntry.Changed += CallsignEntry_Changed;
             return top;
+        }
+
+        private void CallsignEntry_Changed(object sender, EventArgs e)
+        {
+            var enteredCallsignText = callsignEntry.Text.ToString();
+            var workableList = new List<ContestLogRecord>();
+            foreach (var log in database.Records.Reverse().ToList())
+            {
+                if (log.Callsign.StartsWith(enteredCallsignText))
+                {
+                    workableList.Add(log);
+                }
+            }
+
+            logList.SetSource(workableList);
+            logList.Redraw(rect);
+
         }
 
         private void GUIAddRecord()
@@ -233,5 +250,6 @@ namespace GZZLogger
 
             database.AddRecord(log);
         }
+
     }
 }
