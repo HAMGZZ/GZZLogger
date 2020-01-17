@@ -27,7 +27,7 @@ namespace GZZLogger
         private TextField rxsEntry;
         private Label comment;
         private TextField commentEntry;
-        private Label mode;
+        private Label mode;                 //TODO: I ALSO DONT NEED LABELS UP HERE?
         private TextField modeEntry;
 
         public GUI(Database database, Settings settings)
@@ -45,7 +45,7 @@ namespace GZZLogger
             top.ColorScheme.Focus = Application.Driver.MakeAttribute(Color.Black, Color.Brown);
             top.ColorScheme.HotNormal = Application.Driver.MakeAttribute(Color.Red, Color.Black);
             top.ColorScheme.HotFocus = Application.Driver.MakeAttribute(Color.Black, Color.Red);
-
+            //LOG WINDOW
             logWindow = new Window("Log")
             {
                 X = 0,
@@ -60,18 +60,12 @@ namespace GZZLogger
             };
             logList = new ListView(rect, database.Records.Reverse().ToList());
 
+            // CONTACT ENTRY WINDOW
             entryWindow = new Window("New Contact")
             {
                 X = 0,
                 Y = Pos.Percent(80),
                 Width = Dim.Percent(70),
-                Height = Dim.Fill()
-            };
-            statWindow = new Window("Statistics")
-            {
-                X = Pos.Percent(70),
-                Y = 1,
-                Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
 
@@ -224,7 +218,7 @@ namespace GZZLogger
             var workableList = new List<ContestLogRecord>();
             foreach (var log in database.Records.Reverse().ToList())
             {
-                if (log.Callsign.StartsWith(enteredCallsignText))
+                if (log.Callsign.StartsWith(enteredCallsignText.ToUpper()))
                 {
                     workableList.Add(log);
                 }
@@ -238,7 +232,7 @@ namespace GZZLogger
         private void GUIAddRecord()
         {
             var log = new ContestLogRecord();
-            log.Callsign = callsignEntry.Text.ToString();
+            log.Callsign = callsignEntry.Text.ToString().ToUpper();
             if (Int32.TryParse(frequencyEntry.Text.ToString(), out int i))
             {
                 log.FrequencyBand = i;
@@ -246,7 +240,7 @@ namespace GZZLogger
             log.TransmittedSerial = txsEntry.Text.ToString();
             log.ReceivedSerial = rxsEntry.Text.ToString();
             log.Comments = commentEntry.Text.ToString();
-            log.Mode = modeEntry.Text.ToString();
+            log.Mode = modeEntry.Text.ToString().ToUpper();
 
             database.AddRecord(log);
         }
