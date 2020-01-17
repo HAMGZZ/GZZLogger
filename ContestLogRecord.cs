@@ -21,8 +21,8 @@ namespace GZZLogger
 
         public override string ToString()
         {
-            string data = RecordId + "  " + TimeStamp.ToString("dd-MM-yy ") + "  " + Mode + "  " + Callsign + "  " + TransmittedSerial;
+            string data = RecordId.ToString("0000") + "  " + TimeStamp.ToString("dd-MM-yy HH:mm:ss") + "  " + FrequencyBand.ToString("00000") + "  " + Mode.PadRight(5) + "  " + Callsign.PadRight(8) + "  " + TransmittedSerial.PadRight(5) + "  " + ReceivedSerial.PadRight(5) + "  " + Comments;
             return data;
         }
-    }
+    } 
 }

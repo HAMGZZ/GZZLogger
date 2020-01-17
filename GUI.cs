@@ -13,6 +13,7 @@ namespace GZZLogger
         private Settings settings;
 
         private Window logWindow;
+        private Label logListTitles;
         private ListView logList;
         private Window entryWindow;
         private Window statWindow;
@@ -40,6 +41,10 @@ namespace GZZLogger
         {
 
             var top = new Toplevel();
+            top.ColorScheme.Normal = Application.Driver.MakeAttribute(Color.Brown, Color.Black);
+            top.ColorScheme.Focus = Application.Driver.MakeAttribute(Color.Black, Color.Brown);
+            top.ColorScheme.HotNormal = Application.Driver.MakeAttribute(Color.Red, Color.Black);
+            top.ColorScheme.HotFocus = Application.Driver.MakeAttribute(Color.Black, Color.Red);
 
             logWindow = new Window("Log")
             {
@@ -48,9 +53,13 @@ namespace GZZLogger
                 Width = Dim.Percent(70),
                 Height = Dim.Percent(80)
             };
-            var rect = new Rect(1, 2, 80, 20);
-            logList = new ListView(rect, database.Records.ToList());
-
+            logListTitles = new Label(" ID     DATE     TIME    FREQ   MODE   CALLSIGN  TXS    RXS    COMMENT")
+            {
+                X = 1,
+                Y = 2,
+            };
+            var rect = new Rect(1, 3, 89, 21);
+            logList = new ListView(rect, database.Records.Reverse().ToList());
 
             entryWindow = new Window("New Contact")
             {
@@ -150,20 +159,40 @@ namespace GZZLogger
                     rxsEntry.Used = false;
                     commentEntry.Used = false;
                     modeEntry.Used = false;
-                    callsignEntry.Text = ""; 
+                    callsignEntry.Text = "";
                     frequencyEntry.Text = "";
                     //? txs = default
                     //? rxs = default
                     commentEntry.Text = "";
                     modeEntry.Text = "";
+                    logList.Redraw(rect);
                     top.SetFocus(callsignEntry);
                     Application.Refresh();
-                    
+
                 }
             };
 
-            top.Add(logWindow,
-                    logList,
+            var menu = new MenuBar(new MenuBarItem[] {
+                new MenuBarItem ("_File", new MenuItem [] {
+                    new MenuItem ("_New", "Creates new file", null),
+                    new MenuItem ("_Close", "", null),
+                    new MenuItem ("_Quit", "", () => { top.Running = false; })
+                }),
+                new MenuBarItem ("_Edit", new MenuItem [] {
+                    new MenuItem ("_Copy", "", null),
+                    new MenuItem ("C_ut", "", null),
+                    new MenuItem ("_Paste", "", null)
+                })
+               });
+
+
+            menu.ColorScheme.Normal = Application.Driver.MakeAttribute(Color.Brown, Color.Black);
+            menu.ColorScheme.Focus = Application.Driver.MakeAttribute(Color.Black, Color.Brown);
+            menu.ColorScheme.HotNormal = Application.Driver.MakeAttribute(Color.Red, Color.Black);
+            menu.ColorScheme.HotFocus = Application.Driver.MakeAttribute(Color.Black, Color.Red);
+
+            top.Add(
+                    menu,
                     entryWindow,
                     statWindow,
                     callsign,
@@ -178,7 +207,10 @@ namespace GZZLogger
                     commentEntry,
                     mode,
                     modeEntry,
-                    contactInsert);
+                    contactInsert,
+                    logWindow,
+                    logListTitles,
+                    logList);
 
 
 
