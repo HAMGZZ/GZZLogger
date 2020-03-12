@@ -11,6 +11,9 @@ namespace GZZLogger
 
         private Database database;
         private Settings settings;
+        private CallsignLocationLookup locationLookup;
+
+        private Toplevel top;
         private Rect rect = new Rect(1, 3, 89, 21); //TODO: PLEASE RENAME THIS LEWIS!
         private Window logWindow;
         private Label logListTitles;
@@ -25,26 +28,35 @@ namespace GZZLogger
         private TextField txsEntry;
         private Label rxs;
         private TextField rxsEntry;
+        private Label exchange;
+        private TextField exchangeEntry;
         private Label comment;
         private TextField commentEntry;
         private Label mode;                 //TODO: I ALSO DONT NEED LABELS UP HERE?
         private TextField modeEntry;
+        private Label callsignStatLabel;
+        private Label continentStatLabel;
+        private Label countryStatLabel;
+        private Label ituStatLabel;
+        private Label cqStatLabel;
 
-        public GUI(Database database, Settings settings)
+
+        public GUI(Database database, Settings settings, CallsignLocationLookup locationLookup)
         {
             this.database = database;
             this.settings = settings;
-
+            this.locationLookup = locationLookup;
         }
 
         public Toplevel MainUITopLevel()
         {
 
-            var top = new Toplevel();
+            top = new Toplevel();
             top.ColorScheme.Normal = Application.Driver.MakeAttribute(Color.Brown, Color.Black);
             top.ColorScheme.Focus = Application.Driver.MakeAttribute(Color.Black, Color.Brown);
             top.ColorScheme.HotNormal = Application.Driver.MakeAttribute(Color.Red, Color.Black);
             top.ColorScheme.HotFocus = Application.Driver.MakeAttribute(Color.Black, Color.Red);
+
             //LOG WINDOW
             logWindow = new Window("Log")
             {
@@ -53,6 +65,8 @@ namespace GZZLogger
                 Width = Dim.Percent(70),
                 Height = Dim.Percent(80)
             };
+
+
             logListTitles = new Label(" ID     DATE     TIME    FREQ   MODE   CALLSIGN  TXS    RXS    COMMENT")
             {
                 X = 1,
@@ -87,7 +101,16 @@ namespace GZZLogger
                 X = Pos.Percent(17),
                 Y = Pos.Percent(85)
             };
-            frequencyEntry = new TextField("")
+            string tmp_freq;
+            try
+            {
+                tmp_freq = database.Records.Last().FrequencyBand.ToString();
+            }
+            catch
+            {
+                tmp_freq = "";
+            }
+            frequencyEntry = new TextField(tmp_freq)
             {
                 X = Pos.Right(frequency),
                 Y = Pos.Percent(85),
@@ -116,30 +139,53 @@ namespace GZZLogger
                 Width = 5
             };
 
-            comment = new Label("COMMENT:")
+            exchange = new Label("RX EXCHG:")
             {
                 X = Pos.Percent(44),
                 Y = Pos.Percent(85)
             };
 
-            commentEntry = new TextField("")
+            exchangeEntry = new TextField("")
             {
-                X = Pos.Right(comment),
+                X = Pos.Right(exchange),
                 Y = Pos.Percent(85),
-                Width = 25
+                Width = 23
             };
+
 
             mode = new Label("MODE:")
             {
                 X = 1,
                 Y = Pos.Percent(93)
             };
-
-            modeEntry = new TextField("")
+            string tmp_mode;
+            try
+            {
+                tmp_mode = database.Records.Last().Mode;
+            }
+            catch
+            {
+                tmp_mode = "";
+            }
+            modeEntry = new TextField(tmp_mode)
             {
                 X = Pos.Right(mode),
                 Y = Pos.Percent(93),
                 Width = 5
+            };
+
+
+            comment = new Label("COMMENT:")
+            {
+                X = Pos.Percent(15),
+                Y = Pos.Percent(93)
+            };
+
+            commentEntry = new TextField("")
+            {
+                X = Pos.Right(comment),
+                Y = Pos.Percent(93),
+                Width = 30
             };
 
             var contactInsert = new Button(80, 29, "Insert")
@@ -147,6 +193,7 @@ namespace GZZLogger
                 Clicked = () =>
                 {
                     GUIAddRecord();
+                    updateStats(callsignEntry.Text.ToString().ToUpper());
                     callsignEntry.Used = false;
                     frequencyEntry.Used = false;
                     txsEntry.Used = false;
@@ -154,11 +201,11 @@ namespace GZZLogger
                     commentEntry.Used = false;
                     modeEntry.Used = false;
                     callsignEntry.Text = "";
-                    frequencyEntry.Text = "";
+                    frequencyEntry.Text = database.Records.Last().FrequencyBand.ToString();
                     //? txs = default
                     //? rxs = default
                     commentEntry.Text = "";
-                    modeEntry.Text = "";
+                    modeEntry.Text = database.Records.Last().Mode;
                     logList.SetSource(database.Records.Reverse().ToList());
                     logList.Redraw(rect);
                     top.SetFocus(callsignEntry);
@@ -167,16 +214,60 @@ namespace GZZLogger
                 }
             };
 
+
+
+
+            //STAT WINDOW
+
+            statWindow = new Window("Statistics")
+            {
+                X = Pos.Percent(70),
+                Y = 1,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
+
+            callsignStatLabel = new Label("CALLSIGN: ")
+            {
+                X = Pos.Left(statWindow) + 1,
+                Y = 2
+            };
+
+            continentStatLabel = new Label("CONTINENT: ")
+            {
+                X = Pos.Left(statWindow) + 1,
+                Y = 3
+            };
+
+            countryStatLabel = new Label("COUNTRY: ")
+            {
+                X = Pos.Left(statWindow) + 1,
+                Y = 4
+            };
+
+            ituStatLabel = new Label("ITU: ")
+            {
+                X = Pos.Left(statWindow) + 1,
+                Y = 5
+            };
+
+            cqStatLabel = new Label("CQ: ")
+            {
+                X = Pos.Left(statWindow) + 1,
+                Y = 6
+            };
+
+
+
             var menu = new MenuBar(new MenuBarItem[] {
                 new MenuBarItem ("_File", new MenuItem [] {
                     new MenuItem ("_New", "Creates new file", null),
                     new MenuItem ("_Close", "", null),
                     new MenuItem ("_Quit", "", () => { top.Running = false; })
                 }),
-                new MenuBarItem ("_Edit", new MenuItem [] {
-                    new MenuItem ("_Copy", "", null),
-                    new MenuItem ("C_ut", "", null),
-                    new MenuItem ("_Paste", "", null)
+                new MenuBarItem ("_Setting", new MenuItem [] {
+                    new MenuItem ("_TX-Type", "", null),
+                    new MenuItem ("_Your callsign", "", null)
                 })
                });
 
@@ -198,27 +289,44 @@ namespace GZZLogger
                     txsEntry,
                     rxs,
                     rxsEntry,
-                    comment,
-                    commentEntry,
+                    exchange,
+                    exchangeEntry,
                     mode,
                     modeEntry,
+                    comment,
+                    commentEntry,
                     contactInsert,
                     logWindow,
                     logListTitles,
-                    logList);
+                    logList,
+                    callsignStatLabel,
+                    continentStatLabel,
+                    countryStatLabel,
+                    ituStatLabel,
+                    cqStatLabel);
 
 
             callsignEntry.Changed += CallsignEntry_Changed;
+            string tmp_callsign;
+            try
+            {
+                tmp_callsign = database.Records.Last().Callsign;
+            }
+            catch
+            {
+                tmp_callsign = "";
+            }
+            updateStats(tmp_callsign);
             return top;
         }
 
         private void CallsignEntry_Changed(object sender, EventArgs e)
         {
-            var enteredCallsignText = callsignEntry.Text.ToString();
+            var enteredCallsignText = callsignEntry.Text.ToString().ToUpper();
             var workableList = new List<ContestLogRecord>();
             foreach (var log in database.Records.Reverse().ToList())
             {
-                if (log.Callsign.StartsWith(enteredCallsignText.ToUpper()))
+                if (log.Callsign.StartsWith(enteredCallsignText))
                 {
                     workableList.Add(log);
                 }
@@ -226,6 +334,8 @@ namespace GZZLogger
 
             logList.SetSource(workableList);
             logList.Redraw(rect);
+
+            updateStats(enteredCallsignText);
 
         }
 
@@ -243,6 +353,59 @@ namespace GZZLogger
             log.Mode = modeEntry.Text.ToString().ToUpper();
 
             database.AddRecord(log);
+        }
+
+        private void updateStats(string callsign) // TODO: WHY DOES THIS NOT WORK?
+        {
+            var callsignData = locationLookup.GetCallsingComponents(callsign);
+            if(callsignData != null)
+            {
+                var callsignStat = new TextView(new Rect(105, 2, 15, 1))
+                {
+                    CanFocus = false,
+                    ReadOnly = true,
+                    Text = callsign
+                };
+
+                var continentStat = new TextView(new Rect(105, 3, 15, 1))
+                {
+                    CanFocus = false,
+                    ReadOnly = true,
+                    Text = callsignData.Continent
+                };
+
+                var countryStat = new TextView(new Rect(105, 4, 15, 1))
+                {
+                    CanFocus = false,
+                    ReadOnly = true,
+                    Text = callsignData.Country
+                };
+
+                var ituStat = new TextView(new Rect(105, 5, 15, 1))
+                {
+                    CanFocus = false,
+                    ReadOnly = true,
+                    Text = callsignData.ITU
+                };
+
+                var cqStat = new TextView(new Rect(105, 6, 15, 1))
+                {
+                    CanFocus = false,
+                    ReadOnly = true,
+                    Text = callsignData.CQ
+                };
+
+                var countStat = new TextView(new Rect(105, 9, 15, 1))
+                {
+                    CanFocus = false,
+                    ReadOnly = true,
+                    Text = database.Records.Count().ToString()
+                };
+
+                top.Add(callsignStat, continentStat, countryStat, ituStat, cqStat);
+            }
+            
+
         }
 
     }

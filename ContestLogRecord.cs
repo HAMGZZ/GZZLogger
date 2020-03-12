@@ -15,8 +15,10 @@ namespace GZZLogger
         public int FrequencyBand{get;set;}
         public string Mode{get;set;}
         public string Callsign{get;set;}
-        public string TransmittedSerial{get;set;}
-        public string ReceivedSerial{get;set;}
+        public string TransmittedReport{get;set;}
+        public string ReceivedReport{get;set; }
+        public string TransmittedExchange { get; set; }
+        public string ReceivedExchange { get; set; }
         public string Comments{get;set;}
 
         public override string ToString()

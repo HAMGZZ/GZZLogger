@@ -1,6 +1,7 @@
 {
-  "CurrentDatabaseName": "test.db",
-  "ContestMode": false,
-  "ContestName": "false",
-  "PreviousDatabaseName": "testdb.db"
+  "CurrentDatabaseName": "database1.db",
+  "PreviousDatabaseName": "database1.db",
+  "Callsign": "VK2GZZ",
+  "ItuZone": 59,
+  "CqZone": 30
 }

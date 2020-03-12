@@ -9,10 +9,6 @@ namespace GZZLogger
 {
     class CallsignLocationLookup
     {
-        private string country;
-        private int itu;
-        private int cq;
-        private string continent;
 
         private Dictionary<string, CallsignLocationRecord> dictionay;
 

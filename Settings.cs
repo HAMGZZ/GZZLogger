@@ -8,11 +8,12 @@ namespace GZZLogger
 {
     public class Settings
     {
-        private string currentDatabaseName = "database.db";
+        private string currentDatabaseName = "";
         private string previousDatabaseName = "";
-        private bool contestMode = false;
-        private string contestName = "CQWW";
         private string fileName;
+        private string callsign;
+        private int ituZone;
+        private int cqZone;
         private bool initializing;
         public string CurrentDatabaseName
         {
@@ -24,31 +25,41 @@ namespace GZZLogger
                 Persist();
             }
         }
-        public bool ContestMode
-        {
-            get => contestMode;
-            set
-            {
-                contestMode = value;
-                Persist();
-            }
-        }
-
-        public string ContestName
-        {
-            get => contestName;
-            set
-            {
-                contestName = value;
-                Persist();
-            }
-        }
 
         public string PreviousDatabaseName
         {
-            get => previousDatabaseName; set
+            get => previousDatabaseName;
+            set
             {
                 previousDatabaseName = value;
+                Persist();
+            }
+        }
+
+        public string Callsign 
+        { 
+            get => callsign; 
+            set
+            {
+                callsign = value;
+                Persist();
+            }
+        }
+        public int ItuZone
+        {
+            get => ituZone; 
+            set
+            {
+                ituZone = value;
+                Persist();
+            }
+        }
+        public int CqZone 
+        { 
+            get => cqZone;
+            set
+            {
+                cqZone = value;
                 Persist();
             }
         }
