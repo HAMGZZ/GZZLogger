@@ -1,5 +1,0 @@
-RecordId,TimeStamp,FrequencyBand,Mode,Callsign,TransmittedSerial,ReceivedSerial,ReceivedExchange,Comments
-2,2020-03-09T07:14:50.1239623Z,0,,VK243,59,59,,
-3,2020-03-09T07:14:55.2566479Z,0,,VK43,59,59,,
-4,2020-03-09T07:15:12.8480642Z,0,USB,VK4RE,59,59,,asdsad
-5,2020-03-09T07:15:28.7081223Z,14000,USB,FR54,59,59,,

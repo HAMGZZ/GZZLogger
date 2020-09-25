@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="12.2.3" />
+    <PackageReference Include="CsvHelper" Version="15.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Terminal.Gui" Version="0.24.0" />
+    <PackageReference Include="Terminal.Gui" Version="0.81.0" />
   </ItemGroup>
 
 </Project>
